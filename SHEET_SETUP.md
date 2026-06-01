@@ -29,7 +29,12 @@ Columns: `key` | `value`
 | key | value |
 |-----|-------|
 | overview | After School offers families supplemental programming for grades PreK through 5, across STEM, the visual arts, the performing arts, sports, dance, language, debate, music, chess, and more. |
+| location_days | All classes at PS 6\nK–5: Mon–Fri · PreK: Tue–Fri\nFollows DOE calendar |
+| dismissal_times | K–5: 2:30–5:00 PM\nExtended pickup until 5:45 (no extra charge)\nPreK: 2:30–4:00 PM · No extended day |
+| pickup_locations | K–5: School Yard (82nd St)\nPreK: Rotunda Doors (81st St) |
 | nurse | Nurse Sarah is available daily from 2:30–4:00 PM |
+| semester_dates | Fall 2025: Sep 4 – Jan 20\nSpring 2026: Feb 2 – Jun 18 |
+| snacks | Please send a nut-free snack with your child |
 | scholarships | Please adhere to the scholarship request instructions provided by each provider, or email the provider for the class you are interested in and copy the After School Coordinator. The After School team works collaboratively with providers on scholarship and financial aid matters to best support families in need of assistance. |
 | refund_policy | Providers may issue pro-rated refunds upon request, minus the processing fee and cost of any classes that took place before the request. Refund requests must be submitted by February 14, 2026. |
 
@@ -131,9 +136,9 @@ Valid category values: SPORTS · PERFORMING ARTS · STEAM/ARTS · STEM/CODING ·
 
 ## Tab: providers
 
-Columns: `category` | `name` | `contact` | `email` | `description` | `website` | `register_url` | `register_url_2` | `register_label` | `register_label_2`
+Columns: `category` | `name` | `contact` | `email` | `description` | `website` | `register_url` | `register_url_2` | `register_url_3` | `register_label` | `register_label_2` | `register_label_3`
 
-Leave `register_url_2` / `register_label_2` blank if only one registration link.
+Leave unused `register_url_*` / `register_label_*` columns blank.
 
 | category | name | contact | email | description | website | register_url | register_url_2 | register_label | register_label_2 |
 |----------|------|---------|-------|-------------|---------|-------------|----------------|----------------|-----------------|
@@ -170,5 +175,6 @@ Columns: `name` | `description` | `pickup` | `dismissal` | `phone` | `website` |
 - To add a new program: add a new row in the `programs` tab — same columns
 - To mark a class as new: type `true` in the `is_new` column
 - To remove a program: delete its row
+- **Multi-line card content** (location_days, dismissal_times, etc.): press **Alt+Enter** inside the cell to add a new line. First line appears bold/primary; additional lines appear lighter below it.
 - Changes go live on the website within 1 hour automatically
 - If you need changes live immediately: ask a developer to trigger a Vercel redeploy

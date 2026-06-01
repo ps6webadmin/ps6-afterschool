@@ -82,28 +82,22 @@ export default async function Page() {
           <SectionHeading>Essential Information</SectionHeading>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <InfoCard title="Location & Days">
-              <p>All classes at PS 6</p>
-              <p className="mt-1 text-slate-500">K–5: Mon–Fri · PreK: Tue–Fri</p>
-              <p className="mt-1 text-slate-500">Follows DOE calendar</p>
+              {cardLines(general.location_days, 'All classes at PS 6\nK–5: Mon–Fri · PreK: Tue–Fri\nFollows DOE calendar')}
             </InfoCard>
             <InfoCard title="Dismissal Times">
-              <p>K–5: 2:30–5:00 PM</p>
-              <p className="mt-1 text-slate-500">Extended pickup until 5:45 (no extra charge)</p>
-              <p className="mt-1 text-slate-500">PreK: 2:30–4:00 PM · No extended day</p>
+              {cardLines(general.dismissal_times, 'K–5: 2:30–5:00 PM\nExtended pickup until 5:45 (no extra charge)\nPreK: 2:30–4:00 PM · No extended day')}
             </InfoCard>
             <InfoCard title="Pickup Locations">
-              <p>K–5: School Yard (82nd St)</p>
-              <p className="mt-1 text-slate-500">PreK: Rotunda Doors (81st St)</p>
+              {cardLines(general.pickup_locations, 'K–5: School Yard (82nd St)\nPreK: Rotunda Doors (81st St)')}
             </InfoCard>
             <InfoCard title="School Nurse">
-              <p>{general.nurse || 'Nurse Sarah available daily 2:30–4:00 PM'}</p>
+              {cardLines(general.nurse, 'Nurse Sarah available daily 2:30–4:00 PM')}
             </InfoCard>
             <InfoCard title="Semester Dates">
-              <p>Fall 2025: Sep 4 – Jan 20</p>
-              <p className="mt-1 text-slate-500">Spring 2026: Feb 2 – Jun 18</p>
+              {cardLines(general.semester_dates, 'Fall 2025: Sep 4 – Jan 20\nSpring 2026: Feb 2 – Jun 18')}
             </InfoCard>
             <InfoCard title="Snacks">
-              <p>Please send a nut-free snack with your child</p>
+              {cardLines(general.snacks, 'Please send a nut-free snack with your child')}
             </InfoCard>
           </div>
         </div>
@@ -187,7 +181,7 @@ export default async function Page() {
                       </p>
                     )}
                   </div>
-                  {(p.register_url || p.register_url_2) && (
+                  {(p.register_url || p.register_url_2 || p.register_url_3) && (
                     <div className="mt-5 flex flex-wrap gap-2">
                       {p.register_url && (
                         <a href={safeHref(p.register_url)} target="_blank" rel="noopener noreferrer"
@@ -199,6 +193,12 @@ export default async function Page() {
                         <a href={safeHref(p.register_url_2)} target="_blank" rel="noopener noreferrer"
                           className="inline-block text-sm bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium">
                           {p.register_label_2 || 'Register'} →
+                        </a>
+                      )}
+                      {p.register_url_3 && (
+                        <a href={safeHref(p.register_url_3)} target="_blank" rel="noopener noreferrer"
+                          className="inline-block text-sm bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium">
+                          {p.register_label_3 || 'Register'} →
                         </a>
                       )}
                     </div>
@@ -283,6 +283,18 @@ export default async function Page() {
         </div>
       </footer>
     </main>
+  );
+}
+
+function cardLines(value: string | undefined, fallback: string) {
+  const lines = (value || fallback).split('\n').filter(Boolean);
+  return (
+    <>
+      <p>{lines[0]}</p>
+      {lines.slice(1).map((l, i) => (
+        <p key={i} className="mt-1">{l}</p>
+      ))}
+    </>
   );
 }
 

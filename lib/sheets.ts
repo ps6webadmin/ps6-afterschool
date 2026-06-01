@@ -1,36 +1,34 @@
 const SHEET_ID = process.env.GOOGLE_SHEET_ID;
 export const isConfigured = !!SHEET_ID;
 
-function parseCSVLine(line: string): string[] {
-  const result: string[] = [];
-  let current = '';
+function parseCSV(csv: string): Record<string, string>[] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let field = '';
   let inQuotes = false;
-  for (let i = 0; i < line.length; i++) {
-    const ch = line[i];
+
+  for (let i = 0; i < csv.length; i++) {
+    const ch = csv[i];
     if (ch === '"') {
-      if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+      if (inQuotes && csv[i + 1] === '"') { field += '"'; i++; }
       else { inQuotes = !inQuotes; }
     } else if (ch === ',' && !inQuotes) {
-      result.push(current);
-      current = '';
+      row.push(field); field = '';
+    } else if (ch === '\r' && csv[i + 1] === '\n' && !inQuotes) {
+      i++; row.push(field); field = ''; rows.push(row); row = [];
+    } else if (ch === '\n' && !inQuotes) {
+      row.push(field); field = ''; rows.push(row); row = [];
     } else {
-      current += ch;
+      field += ch;
     }
   }
-  result.push(current);
-  return result;
-}
+  if (field || row.length > 0) { row.push(field); rows.push(row); }
 
-function parseCSV(csv: string): Record<string, string>[] {
-  const lines = csv.trim().split('\n');
-  if (lines.length < 2) return [];
-  const headers = parseCSVLine(lines[0]).map(h => h.trim());
-  return lines.slice(1)
-    .filter(l => l.trim())
-    .map(line => {
-      const vals = parseCSVLine(line);
-      return Object.fromEntries(headers.map((h, i) => [h, (vals[i] ?? '').trim()]));
-    });
+  if (rows.length < 2) return [];
+  const headers = rows[0].map(h => h.trim());
+  return rows.slice(1)
+    .filter(r => r.some(c => c.trim()))
+    .map(r => Object.fromEntries(headers.map((h, i) => [h, (r[i] ?? '').trim()])));
 }
 
 async function fetchTab(tab: string): Promise<Record<string, string>[]> {
