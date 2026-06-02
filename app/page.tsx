@@ -216,11 +216,21 @@ export default async function Page() {
                     {p.dismissal && <p><span className="font-medium text-slate-700">Dismissal:</span> {p.dismissal}</p>}
                     {p.phone && <p><span className="font-medium text-slate-700">Phone:</span> {p.phone}</p>}
                   </div>
-                  {p.website && (
-                    <a href={safeHref(p.website)} target="_blank" rel="noopener noreferrer"
-                      className="mt-5 inline-block self-start text-sm bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium">
-                      Learn More →
-                    </a>
+                  {(p.website || p.register_url) && (
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {p.website && (
+                        <a href={safeHref(p.website)} target="_blank" rel="noopener noreferrer"
+                          className="inline-block self-start text-sm bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium">
+                          Learn More →
+                        </a>
+                      )}
+                      {p.register_url && (
+                        <a href={safeHref(p.register_url)} target="_blank" rel="noopener noreferrer"
+                          className="inline-block self-start text-sm bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors font-medium">
+                          Register →
+                        </a>
+                      )}
+                    </div>
                   )}
                 </div>
               ))}
