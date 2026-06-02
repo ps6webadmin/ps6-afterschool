@@ -43,10 +43,13 @@ async function fetchTab(tab: string): Promise<Record<string, string>[]> {
   }
 }
 
-export const getGeneral = () =>
-  fetchTab('general').then(rows =>
+const keyValueTab = (tab: string) =>
+  fetchTab(tab).then(rows =>
     Object.fromEntries(rows.map(r => [r.key, r.value]))
   );
+
+export const getGeneral = () => keyValueTab('general');
+export const getEssential = () => fetchTab('essential');
 
 export const getKeyDates = () => fetchTab('key_dates');
 export const getPrograms = () => fetchTab('programs');

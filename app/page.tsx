@@ -1,4 +1,4 @@
-import { isConfigured, getGeneral, getKeyDates, getPrograms, getProviders, getOffsite } from '@/lib/sheets';
+import { isConfigured, getGeneral, getEssential, getKeyDates, getPrograms, getProviders, getOffsite } from '@/lib/sheets';
 
 type Row = Record<string, string>;
 
@@ -30,8 +30,8 @@ function safeHref(url: string): string {
 export default async function Page() {
   if (!isConfigured) return <SetupMessage />;
 
-  const [general, keyDates, programs, providers, offsite] = await Promise.all([
-    getGeneral(), getKeyDates(), getPrograms(), getProviders(), getOffsite(),
+  const [general, essential, keyDates, programs, providers, offsite] = await Promise.all([
+    getGeneral(), getEssential(), getKeyDates(), getPrograms(), getProviders(), getOffsite(),
   ]);
 
   const programsByCategory = groupBy(programs, 'category');
@@ -77,31 +77,20 @@ export default async function Page() {
       )}
 
       {/* ── Essential Info ── */}
-      <section className="bg-blue-50 py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <SectionHeading>Essential Information</SectionHeading>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <InfoCard title="Location & Days">
-              {cardLines(general.location_days, 'All classes at PS 6\nK–5: Mon–Fri · PreK: Tue–Fri\nFollows DOE calendar')}
-            </InfoCard>
-            <InfoCard title="Dismissal Times">
-              {cardLines(general.dismissal_times, 'K–5: 2:30–5:00 PM\nExtended pickup until 5:45 (no extra charge)\nPreK: 2:30–4:00 PM · No extended day')}
-            </InfoCard>
-            <InfoCard title="Pickup Locations">
-              {cardLines(general.pickup_locations, 'K–5: School Yard (82nd St)\nPreK: Rotunda Doors (81st St)')}
-            </InfoCard>
-            <InfoCard title="School Nurse">
-              {cardLines(general.nurse, 'Nurse Sarah available daily 2:30–4:00 PM')}
-            </InfoCard>
-            <InfoCard title="Semester Dates">
-              {cardLines(general.semester_dates, 'Fall 2025: Sep 4 – Jan 20\nSpring 2026: Feb 2 – Jun 18')}
-            </InfoCard>
-            <InfoCard title="Snacks">
-              {cardLines(general.snacks, 'Please send a nut-free snack with your child')}
-            </InfoCard>
+      {essential.length > 0 && (
+        <section className="bg-blue-50 py-16 px-6">
+          <div className="max-w-4xl mx-auto">
+            <SectionHeading>Essential Information</SectionHeading>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {essential.map((card, i) => (
+                <InfoCard key={i} title={card.title}>
+                  {cardLines(card.value, '')}
+                </InfoCard>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── Programs ── */}
       {programs.length > 0 && (

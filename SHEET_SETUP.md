@@ -15,10 +15,10 @@ Copy that ID into `.env.local` as `GOOGLE_SHEET_ID=`
 
 Also add it in Vercel: Project Settings → Environment Variables
 
-## 4. Create 5 tabs (sheets)
+## 4. Create 6 tabs (sheets)
 
-Rename "Sheet1" to `general`, then add 4 more tabs:
-`key_dates` · `programs` · `providers` · `offsite`
+Rename "Sheet1" to `general`, then add 5 more tabs:
+`essential` · `key_dates` · `programs` · `providers` · `offsite`
 
 ---
 
@@ -29,14 +29,27 @@ Columns: `key` | `value`
 | key | value |
 |-----|-------|
 | overview | After School offers families supplemental programming for grades PreK through 5, across STEM, the visual arts, the performing arts, sports, dance, language, debate, music, chess, and more. |
-| location_days | All classes at PS 6\nK–5: Mon–Fri · PreK: Tue–Fri\nFollows DOE calendar |
-| dismissal_times | K–5: 2:30–5:00 PM\nExtended pickup until 5:45 (no extra charge)\nPreK: 2:30–4:00 PM · No extended day |
-| pickup_locations | K–5: School Yard (82nd St)\nPreK: Rotunda Doors (81st St) |
-| nurse | Nurse Sarah is available daily from 2:30–4:00 PM |
-| semester_dates | Fall 2025: Sep 4 – Jan 20\nSpring 2026: Feb 2 – Jun 18 |
-| snacks | Please send a nut-free snack with your child |
 | scholarships | Please adhere to the scholarship request instructions provided by each provider, or email the provider for the class you are interested in and copy the After School Coordinator. The After School team works collaboratively with providers on scholarship and financial aid matters to best support families in need of assistance. |
 | refund_policy | Providers may issue pro-rated refunds upon request, minus the processing fee and cost of any classes that took place before the request. Refund requests must be submitted by February 14, 2026. |
+
+---
+
+## Tab: essential
+
+Columns: `title` | `value`
+
+Each row = one card in the Essential Information section. Add, remove, or reorder rows freely — the site renders exactly what's here, up to any number of cards (displays max 3 per row).
+
+Use **Alt+Enter** inside a cell to add line breaks within a card.
+
+| title | value |
+|-------|-------|
+| Location & Days | All classes at PS 6[Alt+Enter]K–5: Mon–Fri · PreK: Tue–Fri[Alt+Enter]Follows DOE calendar |
+| Dismissal Times | K–5: 2:30–5:00 PM[Alt+Enter]Extended pickup until 5:45 (no extra charge)[Alt+Enter]PreK: 2:30–4:00 PM · No extended day |
+| Pickup Locations | K–5: School Yard (82nd St)[Alt+Enter]PreK: Rotunda Doors (81st St) |
+| School Nurse | Nurse Sarah is available daily from 2:30–4:00 PM |
+| Semester Dates | Fall 2025: Sep 4 – Jan 20[Alt+Enter]Spring 2026: Feb 2 – Jun 18 |
+| Snacks | Please send a nut-free snack with your child |
 
 ---
 
