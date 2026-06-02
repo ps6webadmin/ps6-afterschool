@@ -35,7 +35,7 @@ async function fetchTab(tab: string): Promise<Record<string, string>[]> {
   if (!SHEET_ID) return [];
   const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tab)}`;
   try {
-    const res = await fetch(url, { next: { revalidate: process.env.NODE_ENV === 'development' ? 0 : 3600 } });
+    const res = await fetch(url, { next: { revalidate: process.env.NODE_ENV === 'development' ? 0 : 300 } });
     if (!res.ok) return [];
     return parseCSV(await res.text());
   } catch {
