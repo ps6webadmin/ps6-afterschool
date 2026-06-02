@@ -29,6 +29,8 @@ Columns: `key` | `value`
 | key | value |
 |-----|-------|
 | overview | After School offers families supplemental programming for grades PreK through 5, across STEM, the visual arts, the performing arts, sports, dance, language, debate, music, chess, and more. |
+| zoom_url | https://zoom.us/rec/share/... (paste full Zoom recording URL — leave blank to hide the banner) |
+| zoom_password | 6Xf8*^Jh (leave blank if no password) |
 | scholarships | Please adhere to the scholarship request instructions provided by each provider, or email the provider for the class you are interested in and copy the After School Coordinator. The After School team works collaboratively with providers on scholarship and financial aid matters to best support families in need of assistance. |
 | refund_policy | Providers may issue pro-rated refunds upon request, minus the processing fee and cost of any classes that took place before the request. Refund requests must be submitted by February 14, 2026. |
 

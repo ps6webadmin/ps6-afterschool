@@ -53,6 +53,24 @@ export default async function Page() {
         </p>
       </header>
 
+      {/* ── Zoom Fair Callout ── */}
+      {general.zoom_url && (
+        <section className="bg-blue-700 py-5 px-6">
+          <div className="max-w-3xl mx-auto flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+            <div className="flex-1">
+              <p className="text-white font-semibold text-sm">🎥 Zoom Fair Recording Available</p>
+              {general.zoom_password && (
+                <p className="text-blue-200 text-xs mt-0.5">Password: <span className="font-mono text-white">{general.zoom_password}</span></p>
+              )}
+            </div>
+            <a href={safeHref(general.zoom_url)} target="_blank" rel="noopener noreferrer"
+              className="shrink-0 inline-block text-sm bg-white text-blue-700 font-semibold px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors">
+              Watch Recording →
+            </a>
+          </div>
+        </section>
+      )}
+
       {/* ── Key Dates ── */}
       {keyDates.length > 0 && (
         <section className="py-16 px-6">
